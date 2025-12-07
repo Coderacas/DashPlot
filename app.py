@@ -83,13 +83,28 @@ desde el menú superior.
 """
 
 
+# ========= AUTORES (CADA NOMBRE EN UNA FILA) =========
+
+autores_html = html.Div(
+    [
+        html.Br(),
+        html.H5("Autores:", className="text-center"),
+
+        html.P("Gustavo Saúl Santana Schwarz | A01710339",   className="text-center", style={"fontSize": "17px"}),
+        html.P("Oscar Méndez Sánchez | A01368480",  className="text-center", style={"fontSize": "17px"}),
+        html.P("Héctor Esteban Pérez Bonifant | A01710834",    className="text-center", style={"fontSize": "17px"}),
+        html.P("Eduardo Montiel Martínez | A01705615", className="text-center", style={"fontSize": "17px"}),
+    ]
+)
+
+
 # ==========================================================
 #                CONFIGURACIÓN DE DASHBOARD
 # ==========================================================
 
 app = dash.Dash(
     __name__,
-    external_stylesheets=[dbc.themes.COSMO]   # Fondo claro elegante
+    external_stylesheets=[dbc.themes.COSMO]   # Tema claro y profesional
 )
 
 app.title = "Dashboard Plotly – Selección de Gráficas"
@@ -153,7 +168,7 @@ app.layout = dbc.Container(
         # ------------------- GRÁFICA -------------------
         dcc.Graph(
             id="graf-placeholder",
-            style={"height": "600px", "display": "none"}  # Oculto inicialmente
+            style={"height": "600px", "display": "none"}  # Oculta por defecto
         ),
 
         # ------------------- DESCRIPCIÓN -------------------
@@ -197,9 +212,23 @@ def update_graph(selected_graf):
     if selected_graf is None:
         return (
             "Bienvenido al Dashboard Interactivo",
-            {},                         # Figura vacía
-            {"display": "none"},         # OCULTA la gráfica
-            objetivo_general
+            {},                         
+            {"display": "none"},         
+
+            html.Div(
+                [
+                    html.P(
+                        objetivo_general,
+                        style={
+                            "textAlign": "center",
+                            "maxWidth": "800px",
+                            "margin": "0 auto",
+                            "fontSize": "18px"
+                        }
+                    ),
+                    autores_html
+                ]
+            )
         )
 
     # --- CUANDO SÍ HAY SELECCIÓN ---
@@ -211,7 +240,7 @@ def update_graph(selected_graf):
     return (
         title,
         fig,
-        {"height": "600px", "display": "block"},   # Mostrar gráfica
+        {"height": "600px", "display": "block"},  
         description
     )
 
