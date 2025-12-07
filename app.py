@@ -73,7 +73,7 @@ descripciones = {
 }
 
 
-# ========= OBJETIVO (VERSIÓN REDUCIDA) =========
+# ========= OBJETIVO =========
 
 objetivo_general = """
 Este dashboard presenta 10 visualizaciones interactivas creadas con Plotly 
@@ -83,7 +83,7 @@ desde el menú superior.
 """
 
 
-# ========= AUTORES (CADA NOMBRE EN UNA FILA) =========
+# ========= AUTORES =========
 
 autores_html = html.Div(
     [
@@ -109,7 +109,6 @@ app = dash.Dash(
 
 app.title = "Dashboard Plotly – Selección de Gráficas"
 
-
 # ==========================================================
 #                      OPCIONES DEL DROPDOWN
 # ==========================================================
@@ -128,7 +127,6 @@ app.layout = dbc.Container(
     [
         html.Br(),
 
-        # ------------------- ENCABEZADO EN RECUADRO -------------------
         html.Div(
             html.H1(
                 "Dashboard Interactivo – Plotly",
@@ -144,14 +142,13 @@ app.layout = dbc.Container(
             className="mb-4"
         ),
 
-        # ------------------- DROPDOWN -------------------
         dbc.Row(
             [
                 dbc.Col(
                     dcc.Dropdown(
                         id="graf-selector",
                         options=graf_options,
-                        value=None,                      # Sin selección inicial
+                        value=None,                      
                         placeholder="Selecciona una gráfica...",
                         clearable=True,
                         className="mb-4"
@@ -208,7 +205,6 @@ app.layout = dbc.Container(
 )
 def update_graph(selected_graf):
 
-    # --- CUANDO NO HAY SELECCIÓN ---
     if selected_graf is None:
         return (
             "Bienvenido al Dashboard Interactivo",
